@@ -5,6 +5,7 @@ RUN set -x \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
      build-essential \
+	 ca-certificates \
      file \
      gcc \
 	 git \
@@ -28,8 +29,6 @@ RUN set -x \
      swig \
      wget \
      zlib1g-dev \
-  && apt-get install -y \
-	 git \
   && rm -rf /var/lib/apt/lists/* \
   && cd /tmp \
   && git clone https://github.com/dstndstn/astrometry.net \
