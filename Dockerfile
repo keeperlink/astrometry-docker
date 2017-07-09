@@ -1,6 +1,6 @@
 FROM ubuntu
 MAINTAINER Sergei Goshko <serge@keeperlink.com>
-ADD /download-data.sh /download-data.sh
+ADD /download-data.sh /tmp/download-data.sh
 RUN set -x \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -39,11 +39,12 @@ RUN set -x \
   && make py \
   && make extra \
   && make install \
-  && cd / \
+  && cd /tmp \
   && rm -fr /tmp/astrometry.net* \
-  && chmod +x /download-data.sh \
-  && /download-data.sh 16 \
   && echo "Testing solve-field..." \
+  && sleep 5s \
+  && chmod +x /tmp/download-data.sh \
+  && /tmp/download-data.sh 16 \
   && mkdir /tmp/test \
   && cd /tmp/test \
   && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg
