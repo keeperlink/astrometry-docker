@@ -26,8 +26,8 @@ do
   src="http://broiler.astrometry.net/~dstn/4200/$name"
   dst="$dstdir/$name"
   if [ ! -f "$dst" ]; then
-    echo wget -o $dst $src
-    wget -o $dst $src
+    echo wget -O $dst $src
+    wget -O $dst $src
   fi
 done
 ls -l $dstdir
