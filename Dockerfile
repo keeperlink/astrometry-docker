@@ -3,7 +3,7 @@ MAINTAINER Sergei Goshko <serge@keeperlink.com>
 ADD /download-data.sh /download-data.sh
 RUN set -x \
   && apt-get update \
-  && apt-get install -y \
+  && apt-get install -y --no-install-recommends \
      build-essential \
      file \
      gcc \
@@ -28,6 +28,8 @@ RUN set -x \
      swig \
      wget \
      zlib1g-dev \
+  && apt-get install -y \
+	 git \
   && rm -rf /var/lib/apt/lists/* \
   && cd /tmp \
   && git clone https://github.com/dstndstn/astrometry.net \
@@ -47,7 +49,7 @@ RUN set -x \
   && cd /tmp/test \
   && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg || true
 
-# --no-install-recommends
+
 #  && wget http://astrometry.net/downloads/astrometry.net-latest.tar.gz \
 #  && tar -xzf astrometry.net-latest.tar.gz \
 #  && rm astrometry.net-latest.tar.gz \
