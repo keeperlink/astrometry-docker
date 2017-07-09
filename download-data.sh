@@ -1,6 +1,7 @@
 #!/bin/bash
 level=${1:-8}
 echo level: $level
+dstdir=/usr/local/astrometry/data
 afiles=()
 for (( c=19; c>=0 && c>=level; c-- ))
 do
@@ -17,14 +18,16 @@ do
     done
   fi
 done
-echo afiles=$afiles
 
+ls -l $dstdir
 for i in "${afiles[@]}"
 do
   name=index-42$i.fits
   src="http://broiler.astrometry.net/~dstn/4200/$name"
-  dst="/usr/local/astrometry/data/$name"
+  dst="$dstdir/$name"
   if [ ! -f "$dst" ]; then
+    echo wget -o $dst $src
     wget -o $dst $src
   fi
 done
+ls -l $dstdir

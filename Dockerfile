@@ -45,13 +45,13 @@ RUN set -x \
   && echo "Testing..." \
   && mkdir /tmp/test \
   && cd /tmp/test \
-  && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg
+  && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg || true
 
 # --no-install-recommends
 #  && wget http://astrometry.net/downloads/astrometry.net-latest.tar.gz \
 #  && tar -xzf astrometry.net-latest.tar.gz \
 #  && rm astrometry.net-latest.tar.gz \
 
-VOLUME ["/usr/local/astrometry/data"]
+#VOLUME ["/usr/local/astrometry/data"]
 
 ENTRYPOINT ["download-data.sh", "7"]
