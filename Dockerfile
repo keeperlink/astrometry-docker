@@ -54,4 +54,4 @@ RUN set -x \
 
 #VOLUME ["/usr/local/astrometry/data"]
 
-ENTRYPOINT ["download-data.sh", "7"]
+#ENTRYPOINT ["/download-data.sh", "7"]
