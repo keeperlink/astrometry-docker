@@ -42,17 +42,17 @@ RUN set -x \
   && cd / \
   && rm -fr /tmp/astrometry.net* \
   && chmod +x /download-data.sh \
-  && /download-data.sh 9 \
-  && echo "Testing..." \
+  && /download-data.sh 16 \
+  && echo "Testing solve-field..." \
   && mkdir /tmp/test \
   && cd /tmp/test \
-  && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg || true
+  && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg
 
 
 #  && wget http://astrometry.net/downloads/astrometry.net-latest.tar.gz \
 #  && tar -xzf astrometry.net-latest.tar.gz \
 #  && rm astrometry.net-latest.tar.gz \
 
-#VOLUME ["/usr/local/astrometry/data"]
+VOLUME ["/usr/local/astrometry/data"]
 
 #ENTRYPOINT ["/download-data.sh", "7"]
