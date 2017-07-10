@@ -47,8 +47,9 @@ ENV PATH="/usr/local/astrometry/bin:${PATH}"
 ADD /*.sh /
 RUN set -x \
   && echo "Testing solve-field..." \
-  && sleep 5s \
+  && sync \
   && chmod +x /*.sh \
+  && sync \
   && /download-data.sh 17 \
   && solve-field --overwrite /usr/local/astrometry/examples/apod4.jpg
 
