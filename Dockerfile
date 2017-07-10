@@ -48,7 +48,7 @@ ADD /*.sh /
 RUN set -x \
   && echo "Testing solve-field..." \
   && sleep 2s \
-  && chmod +x /*.sh
+  && chmod +x /*.sh \
   && /download-data.sh 17 \
   && mkdir /tmp/test \
   && cd /tmp/test \
