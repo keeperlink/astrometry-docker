@@ -1,6 +1,5 @@
 FROM ubuntu
 MAINTAINER Sergei Goshko <serge@keeperlink.com>
-ADD /download-data.sh /tmp/download-data.sh
 RUN set -x \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -29,7 +28,9 @@ RUN set -x \
      swig \
      wget \
      zlib1g-dev \
-  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -x \
   && cd /tmp \
   && git clone https://github.com/dstndstn/astrometry.net \
   && cd astrometry.net* \
@@ -40,20 +41,19 @@ RUN set -x \
   && make extra \
   && make install \
   && cd /tmp \
-  && rm -fr /tmp/astrometry.net* \
+  && rm -fr /tmp/astrometry.net*
+
+ENV PATH="/usr/local/astrometry/bin:${PATH}"
+ADD /*.sh /
+RUN set -x \
   && echo "Testing solve-field..." \
-  && sleep 5s \
-  && chmod +x /tmp/download-data.sh \
-  && /tmp/download-data.sh 16 \
+  && sleep 2s \
+  && chmod +x /*.sh
+  && /download-data.sh 17 \
   && mkdir /tmp/test \
   && cd /tmp/test \
-  && /usr/local/astrometry/bin/solve-field /usr/local/astrometry/examples/apod4.jpg
-
-
-#  && wget http://astrometry.net/downloads/astrometry.net-latest.tar.gz \
-#  && tar -xzf astrometry.net-latest.tar.gz \
-#  && rm astrometry.net-latest.tar.gz \
+  && solve-field --overwrite /usr/local/astrometry/examples/apod4.jpg
 
 VOLUME ["/usr/local/astrometry/data"]
 
-#ENTRYPOINT ["/download-data.sh", "7"]
+ENTRYPOINT ["/entry.sh"]
