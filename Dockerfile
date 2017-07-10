@@ -1,7 +1,5 @@
 FROM ubuntu
 MAINTAINER Sergei Goshko <serge@keeperlink.com>
-ENV PATH="/usr/local/astrometry/bin:${PATH}"
-ADD /*.sh /
 RUN set -x \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -30,8 +28,11 @@ RUN set -x \
      swig \
      wget \
      zlib1g-dev \
-  && rm -rf /var/lib/apt/lists/* \
-  && chmod +x /*.sh
+  && rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/usr/local/astrometry/bin:${PATH}"
+ADD /*.sh /
+RUN chmod +x /*.sh
 
 VOLUME ["/usr/local/astrometry/data"]
 
