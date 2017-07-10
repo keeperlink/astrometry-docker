@@ -9,4 +9,6 @@ fi
 echo "Check/download indexes..."
 /download-data.sh ${INDEX_LEVEL:-8}
 
-/bin/bash
+echo "Astrometry default entry point: DONE."
+
+#/bin/bash
